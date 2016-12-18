@@ -61,15 +61,5 @@ class Temporada
             return $e->assistido;
         });
     }
-
-    public function getEpisodiosNaoAssistidos()
-    {
-        $episodios = $this->episodios->toArray();
-
-        return array_filter($episodios, function ($e)
-        {
-            return !$e->assistido;
-        });
-    }
 }
 
