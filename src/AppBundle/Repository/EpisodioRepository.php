@@ -16,11 +16,12 @@ class EpisodioRepository extends EntityRepository
             ->execute();
     }
 
-    public function desmarcarTodosDaTemporada(int $temporadaId): void
+    public function marcarTodosDaTemporada(int $temporadaId, bool $assistido = false): void
     {
-        $sql = 'UPDATE AppBundle:Episodio e SET e.assistido = 0 WHERE e.temporadaId = :temporadaId';
+        $sql = 'UPDATE AppBundle:Episodio e SET e.assistido = :assistido WHERE e.temporadaId = :temporadaId';
 
         $this->getEntityManager()->createQuery($sql)
+            ->setParameter(':assistido', $assistido)
             ->setParameter(':temporadaId', $temporadaId)
             ->execute();
     }

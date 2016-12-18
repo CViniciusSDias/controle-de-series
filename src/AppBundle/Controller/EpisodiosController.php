@@ -28,7 +28,7 @@ class EpisodiosController extends Controller
         $temporadaId = $request->request->get('temporada');
         $episodiosMarcados = $request->request->get('episodio');
         $episodiosRepository = $this->getDoctrine()->getRepository('AppBundle:Episodio');
-        $episodiosRepository->desmarcarTodosDaTemporada($temporadaId);
+        $episodiosRepository->marcarTodosDaTemporada($temporadaId, false);
 
         foreach ($episodiosMarcados as $episodio) {
             $episodiosRepository->marcarAssitidoPorId($episodio, true);
@@ -37,5 +37,17 @@ class EpisodiosController extends Controller
         $this->addFlash('success', 'Episódios marcados como assistidos com sucesso');
 
         return $this->redirectToRoute('episodios', ['temporadaId' => $temporadaId]);
+    }
+
+    /**
+     * @Route("/episodios/assistir-todos/{temporadaId}", name="assistir_todos")
+     */
+    public function assistirTodosAction(Request $request, int $temporadaId): Response
+    {
+        $this->getDoctrine()->getRepository('AppBundle:Episodio')
+            ->marcarTodosDaTemporada($temporadaId, true);
+        $this->addFlash('success', 'Todos os episódios marcados como assistidos');
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 }

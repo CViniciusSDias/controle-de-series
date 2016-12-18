@@ -2,16 +2,25 @@
 
 {% block conteudo %}
 <div class="col-sm-6 col-sm-offset-3">
-    <div class="list-group">
+    <ul class="list-group">
         {% for temporada in temporadas %}
-        <a class="list-group-item" href="{{ path('episodios', {'temporadaId': temporada.id}) }}">
-            {{ serie }} temporada {{ temporada.numero }}
+        <li class="list-group-item">
+            <a href="{{ path('episodios', {'temporadaId': temporada.id}) }}">
+                {{ serie }} temporada {{ temporada.numero }}
+            </a>
+
             <span class="badge">
                 {{ temporada.episodiosAssistidos | length }} / {{ temporada.episodios | length }}
             </span>
-        </a>
+            <span class="pull-right">
+                <a class="btn btn-link"
+                    href="{{ path('assistir_todos', {'temporadaId': temporada.id}) }}">
+                    Assitir todos
+                </a>
+            </span>
+        </li>
         {% endfor %}
-    </div>
+    </ul>
 
     <div class="text-center">
         <a href="{{ path('series') }}" class="btn btn-success">Voltar</a>
