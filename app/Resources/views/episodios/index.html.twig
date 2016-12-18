@@ -3,12 +3,30 @@
 {% block conteudo %}
 <div class="col-sm-6 col-sm-offset-3">
     <h1 class="text-center">{{ temporada.serie.nome }} - Temporada {{ temporada.numero }}</h1>
-    <ul class="list-group">
-        {% for episodio in temporada.episodios %}
-        <li class="list-group-item">
-            Episódio {{ episodio.episodio }}
-        </li>
-        {% endfor %}
-    </ul>
+
+    <form action="{{ path('assistir_episodios') }}" method="post">
+        <input type="hidden" name="temporada" value="{{ temporada.id }}">
+
+        <ul class="list-group">
+            {% for episodio in temporada.episodios %}
+            <li class="list-group-item">
+                Episódio {{ episodio.episodio }}
+                <div class="pull-right">
+                    <input name="episodio[]" value="{{ episodio.id }}" type="checkbox"
+                        {{ episodio.assistido ? 'checked' : '' }}>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-6">
+                <a href="{{ path('temporadas', {'serieId': temporada.serie.id}) }}" class="btn btn-danger btn-block">Voltar</a>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-success btn-block">Salvar</button>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

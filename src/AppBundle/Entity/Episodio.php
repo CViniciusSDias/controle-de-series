@@ -30,6 +30,11 @@ class Episodio
     private $assistido;
 
     /**
+     * @ORM\Column(name="temporada_id", type="integer")
+     */
+    private $temporadaId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Temporada", inversedBy="episodios", cascade={"persist"})
      * @ORM\JoinColumn(name="temporada_id", referencedColumnName="id", onDelete="CASCADE")
      */
