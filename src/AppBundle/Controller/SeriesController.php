@@ -24,6 +24,7 @@ class SeriesController extends Controller
      */
     public function listarAction(): Response
     {
+        /** @var Serie[] $series Busca todas as séries do banco de dados, ordenadas pelo nome */
         $series = $this->getDoctrine()->getRepository('AppBundle:Serie')->findBy([], ['nome' => 'asc']);
         return $this->render('series/index.html.twig', ['series' => $series]);
     }

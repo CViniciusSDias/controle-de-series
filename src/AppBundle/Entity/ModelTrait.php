@@ -17,7 +17,7 @@ trait ModelTrait
         throw new NoSuchPropertyException('Propriedade inexistente');
     }
 
-    public function __set($propriedade, $valor): void
+    public function __set($propriedade, $valor)
     {
         $metodo = 'set' . ucfirst($propriedade);
         if (method_exists($this, $propriedade)) {

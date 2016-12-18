@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block conteudo %}
+<div class="col-sm-6 col-sm-offset-3">
+    <h1 class="text-center">{{ temporada.serie.nome }} - Temporada {{ temporada.numero }}</h1>
+    <ul class="list-group">
+        {% for episodio in temporada.episodios %}
+        <li class="list-group-item">
+            Episódio {{ episodio.episodio }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -4,10 +4,12 @@
 <div class="col-sm-6 col-sm-offset-3">
     <div class="list-group">
         {% for temporada in temporadas %}
-            <a class="list-group-item" href="#">
-                {{ serie }} temporada {{ temporada.numero }}
-                <span class="badge">{{ temporada.episodiosAssistidos | length }} / {{ temporada.episodios | length }}</span>
-            </a>
+        <a class="list-group-item" href="{{ path('episodios', {'temporadaId': temporada.id}) }}">
+            {{ serie }} temporada {{ temporada.numero }}
+            <span class="badge">
+                {{ temporada.episodiosAssistidos | length }} / {{ temporada.episodios | length }}
+            </span>
+        </a>
         {% endfor %}
     </div>
 
