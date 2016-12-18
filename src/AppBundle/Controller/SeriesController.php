@@ -24,7 +24,6 @@ class SeriesController extends Controller
      */
     public function listarAction(): Response
     {
-        /** @var Serie[] $series Busca todas as séries do banco de dados, ordenadas pelo nome */
         $series = $this->getDoctrine()->getRepository('AppBundle:Serie')->findBy([], ['nome' => 'asc']);
         return $this->render('series/index.html.twig', ['series' => $series]);
     }
@@ -50,8 +49,8 @@ class SeriesController extends Controller
         $serie = new Serie();
         $serie->nome = $nomeSerie;
         $serie->preencheTemporadas($numeroDeTemporadas, $numeroDeEpisodios);
-        $em = $this->getDoctrine()->getManager();
 
+        $em = $this->getDoctrine()->getManager();
         $em->persist($serie);
         $em->flush();
 
@@ -65,9 +64,10 @@ class SeriesController extends Controller
      */
     public function removerSerie(Request $request): Response
     {
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Serie');
-        $serie = $repository->find($request->request->get('serie'));
+        $serieId = $request->request->get('serie');
         $em = $this->getDoctrine()->getManager();
+
+        $serie = $em->getPartialReference(Serie::class, ['id' => $serieId]);
         $em->remove($serie);
         $em->flush();
 
