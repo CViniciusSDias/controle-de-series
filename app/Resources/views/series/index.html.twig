@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block conteudo %}
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Séries</h1>
+        <div class="list-group">
+            {% for serie in series %}
+            <a href="{{ path('temporadas', {'serieId': serie.id}) }}" class="list-group-item">
+                {{ serie.nome }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{
+  "name": "controle-de-series",
+  "version": "1.0.0",
+  "description": "Sistema para controlar episodios ja assistidos de seriados",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

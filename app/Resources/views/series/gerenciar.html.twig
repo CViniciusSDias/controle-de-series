@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block conteudo %}
+    <div class="col-md-6 col-md-offset-3">
+        <section>
+            <h1 class="text-center">Adicionar Série</h1>
+            <form action="{{ path('salvar_serie') }}" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do Seriado" required>
+                </div>
+                <div class="form-group">
+                    <label for="temporadas">Temporadas:</label>
+                    <input type="number" class="form-control" name="temporadas" id="temporadas" placeholder="Digite o número de temporadas" required>
+                </div>
+                <div class="form-group">
+                    <label for="episodios">Episódios por Temporada:</label>
+                    <input type="number" class="form-control" name="episodios" id="episodios" placeholder="Digite o número de episódios por temporada" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </form>
+        </section>
+
+        <section>
+            <h1 class="text-center">Remover Série</h1>
+            <div class="col-md-8 col-md-offset-2">
+                <form action="{{ path('remover_serie') }}" method="post">
+                    <div class="col-xs-6">
+                        <select name="serie" id="serie" class="form-control">
+                            {% for serie in series %}
+                            <option value="{{ serie.id }}">{{ serie.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-danger btn-block">Remover</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+{% endblock %}
